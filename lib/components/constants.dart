@@ -12,6 +12,18 @@ const kBottomSheetTextStyle = TextStyle(
   color: Colors.white,
 );
 
+const kGameOverTextStyle = TextStyle(
+  fontSize: 50,
+  fontWeight: FontWeight.bold,
+  color: Colors.white,
+  fontFamily: 'Russo One',
+);
+
+const kNickNameStyle = TextStyle(
+  fontWeight: FontWeight.bold,
+  fontSize: 30,
+);
+
 const kGameHeadingStyle = TextStyle(
   fontSize: 22,
   fontWeight: FontWeight.w900,

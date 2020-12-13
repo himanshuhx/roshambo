@@ -45,12 +45,17 @@ class _GameScreenState extends State<GameScreen> {
         });
         life_left = LifeLeft();
         if (life_left == 0) {
+          int currentUserScore = score;
+          setState(() {
+            life_left = 5;
+            score = 0;
+          });
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) {
                 return GameOver(
-                  currentUserScore: score,
+                  currentUserScore: currentUserScore,
                 );
               },
             ),

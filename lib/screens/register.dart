@@ -24,48 +24,42 @@ class _RegisterState extends State<Register> {
     return Scaffold(
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
+        color: Colors.amberAccent,
         child: Container(
           padding: EdgeInsets.all(20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Flexible(
-                child: Hero(
-                  tag: 'tag',
-                  child: Container(
-                    child: CircleAvatar(
-                      radius: 50,
-                      backgroundColor: Colors.redAccent,
-                      child: Image.asset('images/icon.png'),
-                    ),
-                  ),
-                ),
+              CircleAvatar(
+                radius: 70,
+                backgroundColor: Colors.amber,
+                child: Image.asset('images/icon.png'),
               ),
               SizedBox(
                 height: 20,
               ),
-              SizedBox(
-                child: ColorizeAnimatedTextKit(
-                  isRepeatingAnimation: true,
-                  text: ['Hey Sign up', 'To play', 'Roshambo'],
-                  textStyle: kHeadingTextStyle,
-                  textAlign: TextAlign.center,
-                  colors: [
-                    Color(0xffFB5757),
-                    Colors.purple,
-                    Colors.blue,
-                    Colors.yellow,
-                  ],
-                ),
-              ),
+              // SizedBox(
+              //   child: ColorizeAnimatedTextKit(
+              //     isRepeatingAnimation: true,
+              //     text: ['Hey Sign up', 'To play', 'Roshambo'],
+              //     textStyle: kHeadingTextStyle,
+              //     textAlign: TextAlign.center,
+              //     colors: [
+              //       Color(0xffFB5757),
+              //       Colors.purple,
+              //       Colors.blue,
+              //       Colors.yellow,
+              //     ],
+              //   ),
+              // ),
               SizedBox(
                 height: 20,
               ),
               TextField(
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.black45,
+                  color: Colors.white70,
                 ),
                 onChanged: (value) {
                   email = value;
@@ -73,7 +67,7 @@ class _RegisterState extends State<Register> {
                 decoration: kTextFieldStyle.copyWith(
                     hintText: 'Enter your mail',
                     hintStyle: TextStyle(
-                      color: Colors.black26,
+                      color: Colors.white70,
                     )),
               ),
               SizedBox(
@@ -82,7 +76,7 @@ class _RegisterState extends State<Register> {
               TextField(
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.black45,
+                  color: Colors.white70,
                 ),
                 onChanged: (value) {
                   password = value;
@@ -90,7 +84,7 @@ class _RegisterState extends State<Register> {
                 decoration: kTextFieldStyle.copyWith(
                     hintText: 'Password Here',
                     hintStyle: TextStyle(
-                      color: Colors.black26,
+                      color: Colors.white70,
                     )),
               ),
               SizedBox(
@@ -98,13 +92,13 @@ class _RegisterState extends State<Register> {
               ),
               Button(
                 title: 'Login',
-                color: Colors.lightGreen,
                 onPressed: () async {
-                  final user = await _auth.createUserWithEmailAndPassword(
-                      email: email, password: password);
                   setState(() {
                     showSpinner = true;
                   });
+                  final user = await _auth.createUserWithEmailAndPassword(
+                      email: email, password: password);
+
                   try {
                     if (user != null) {
                       Navigator.push(
@@ -131,7 +125,7 @@ class _RegisterState extends State<Register> {
                   Text(
                     'Already a member?? SignIn',
                     style: TextStyle(
-                      color: Colors.black26,
+                      color: Colors.white70,
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),

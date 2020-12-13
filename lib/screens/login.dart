@@ -24,7 +24,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ModalProgressHUD(
-        color: Colors.redAccent,
+        color: Colors.amberAccent,
         inAsyncCall: showSpinner,
         child: Container(
           padding: EdgeInsets.all(20),
@@ -32,42 +32,35 @@ class _LoginState extends State<Login> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Flexible(
-                child: Hero(
-                  tag: 'tag',
-                  child: Container(
-                    child: CircleAvatar(
-                      radius: 50,
-                      backgroundColor: Colors.redAccent,
-                      child: Image.asset('images/icon.png'),
-                    ),
-                  ),
-                ),
+              CircleAvatar(
+                radius: 70,
+                backgroundColor: Colors.amber,
+                child: Image.asset('images/icon.png'),
               ),
               SizedBox(
                 height: 20,
               ),
-              SizedBox(
-                child: ColorizeAnimatedTextKit(
-                  isRepeatingAnimation: true,
-                  text: ['Welcome Back', 'We Miss You', 'Login And Play'],
-                  textStyle: kHeadingTextStyle,
-                  textAlign: TextAlign.center,
-                  colors: [
-                    Color(0xffFB5757),
-                    Colors.blue,
-                    Colors.yellow,
-                    Colors.red,
-                  ],
-                ),
-              ),
+              // SizedBox(
+              //               //   child: ColorizeAnimatedTextKit(
+              //               //     isRepeatingAnimation: true,
+              //               //     text: ['Welcome Back', 'We Miss You', 'Login And Play'],
+              //               //     textStyle: kHeadingTextStyle,
+              //               //     textAlign: TextAlign.center,
+              //               //     colors: [
+              //               //       Color(0xffFB5757),
+              //               //       Colors.blue,
+              //               //       Colors.yellow,
+              //               //       Colors.red,
+              //               //     ],
+              //               //   ),
+              //               // ),
               SizedBox(
                 height: 20,
               ),
               TextField(
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.black45,
+                  color: Colors.white70,
                 ),
                 onChanged: (value) {
                   email = value;
@@ -75,7 +68,7 @@ class _LoginState extends State<Login> {
                 decoration: kTextFieldStyle.copyWith(
                     hintText: 'Enter your mail',
                     hintStyle: TextStyle(
-                      color: Colors.black26,
+                      color: Colors.white70,
                     )),
               ),
               SizedBox(
@@ -84,7 +77,7 @@ class _LoginState extends State<Login> {
               TextField(
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.black45,
+                  color: Colors.white70,
                 ),
                 onChanged: (value) {
                   password = value;
@@ -92,7 +85,7 @@ class _LoginState extends State<Login> {
                 decoration: kTextFieldStyle.copyWith(
                     hintText: 'Password Here',
                     hintStyle: TextStyle(
-                      color: Colors.black26,
+                      color: Colors.white70,
                     )),
               ),
               SizedBox(
@@ -101,13 +94,17 @@ class _LoginState extends State<Login> {
               Button(
                 title: 'Login',
                 onPressed: () async {
-                  final user = await _auth.signInWithEmailAndPassword(
-                      email: email, password: password);
                   setState(() {
                     showSpinner = true;
                   });
+                  final user = await _auth.signInWithEmailAndPassword(
+                      email: email, password: password);
+
                   try {
                     if (user != null) {
+                      // setState(() {
+                      //   showSpinner = false;
+                      // });
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -132,7 +129,7 @@ class _LoginState extends State<Login> {
                   Text(
                     'New User ??  Register',
                     style: TextStyle(
-                      color: Colors.black26,
+                      color: Colors.white70,
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
