@@ -11,11 +11,11 @@ Clone the repository or you can directly paste the project link in Android Studi
 - This Application uses Firebase Email Authentication as a SignUp method for users.
 - Users can create account through their Email.
 - User can `set` and `update` their Profile Image, Username in Profile Tab of the Application.
-- Game as three card and rules to play are pretty obvious :)
+- Game has three cards and rules to play are pretty obvious :)
 - User has 5 lives, after life becomes 0, user is navigated to Game Over Screen.
-- Game Over Screen Shows two tabs.
+- Game Over Screen Shows two Cards.
 - Left most Card shows the name of user with highest score among all players and his username.
-- Right most Card shows current user highest score and his name.
+- Right most Card shows current user's highest score till now and his name.
 
 
 ## Screenshots  :camera:
