@@ -48,10 +48,6 @@ class _GameScreenState extends State<GameScreen> {
         life_left = LifeLeft();
         if (life_left == 0) {
           int currentUserScore = score;
-          setState(() {
-            life_left = 5;
-            score = 0;
-          });
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -62,6 +58,10 @@ class _GameScreenState extends State<GameScreen> {
               },
             ),
           );
+          setState(() {
+            life_left = 5;
+            score = 0;
+          });
         } else {
           setState(() {
             life_left;
@@ -167,40 +167,31 @@ class _GameScreenState extends State<GameScreen> {
                 showModalBottomSheet(
                   context: context,
                   builder: (context) => Container(
-                    child: Container(
-                      height: MediaQuery.of(context).size.height * 1,
-                      padding: EdgeInsets.all(35),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            child: Text(
-                              verdict.toUpperCase(),
-                              style: kBottomSheetTextStyle,
+                    padding: EdgeInsets.all(13),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          child: Text(
+                            verdict.toUpperCase(),
+                            style: kBottomSheetTextStyle.copyWith(
+                              fontSize: 30,
                             ),
                           ),
-                          Container(
-                            height: 200,
-                            padding: EdgeInsets.all(30),
-                            child: Image.asset('images/$computer_choice.png'),
-                          ),
-                          Text(
-                            'Opponent -> $computer_choice'.toUpperCase(),
-                            style: kBottomSheetTextStyle,
-                          ),
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.lightBlueAccent,
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(25),
-                          topLeft: Radius.circular(25),
                         ),
-                      ),
+                        Container(
+                          height: 250,
+                          child: Image.asset('images/$computer_choice.png'),
+                        ),
+                        Text(
+                          'OPPONENT - $computer_choice'.toUpperCase(),
+                          style: kBottomSheetTextStyle,
+                        ),
+                      ],
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.black45,
+                      color: Colors.lightBlueAccent,
                     ),
                   ),
                 );

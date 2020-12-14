@@ -16,7 +16,7 @@ class _ProfileState extends State<Profile> {
   final _auth = FirebaseAuth.instance;
   User loggedInUser;
   String nickName = 'unknown';
-  bool showSpinner = false;
+  bool showSpinner = true;
 
   @override
   void initState() {
@@ -48,10 +48,10 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0xff1B192D),
+      backgroundColor: Color(0xff1E1E20),
       body: ModalProgressHUD(
-        color: Colors.amber,
-        opacity: 0.75,
+        color: Colors.black54,
+        opacity: 0.85,
         inAsyncCall: showSpinner,
         child: SafeArea(
           child: Center(
@@ -69,7 +69,7 @@ class _ProfileState extends State<Profile> {
                     child: CircleAvatar(
                       radius: 70,
                       backgroundColor: Colors.black45,
-                      child: Image.asset('images/icon.png'),
+                      child: Image.asset('images/profilePic.png'),
                     ),
                   ),
                   Text(
@@ -79,7 +79,7 @@ class _ProfileState extends State<Profile> {
                   TextField(
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.black54,
+                      color: Colors.white,
                     ),
                     onChanged: (value) {
                       nickName = value;
@@ -87,7 +87,7 @@ class _ProfileState extends State<Profile> {
                     decoration: kTextFieldStyle.copyWith(
                         hintText: 'Enter your new Name',
                         hintStyle: TextStyle(
-                          color: Colors.black45,
+                          color: Colors.white70,
                         )),
                   ),
                   Button(
@@ -111,7 +111,7 @@ class _ProfileState extends State<Profile> {
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
-                color: Colors.teal,
+                color: Colors.white24,
               ),
             ),
           ),

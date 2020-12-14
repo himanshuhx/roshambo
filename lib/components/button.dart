@@ -13,8 +13,8 @@ class Button extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(20),
       child: Material(
-        elevation: 5,
-        color: Color(0xffFB5757),
+        elevation: 10,
+        color: Colors.teal,
         borderRadius: BorderRadius.circular(10),
         child: MaterialButton(
           onPressed: onPressed,

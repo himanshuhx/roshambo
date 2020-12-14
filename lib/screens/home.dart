@@ -29,10 +29,10 @@ class _HomeState extends State<Home> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 10,
-        backgroundColor: Color(0xff1B192D),
+        backgroundColor: Color(0xff1E1E20),
         unselectedItemColor: Colors.white70,
-        selectedFontSize: 14,
-        unselectedFontSize: 12,
+        showUnselectedLabels: true,
+        unselectedFontSize: 11,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -44,7 +44,7 @@ class _HomeState extends State<Home> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Color(0xffFB5757),
+        selectedItemColor: Colors.teal,
         onTap: _onItemTapped,
       ),
     );

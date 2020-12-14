@@ -24,8 +24,8 @@ class _LoginState extends State<Login> {
       resizeToAvoidBottomInset: false,
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
-        color: Colors.amberAccent,
-        opacity: 0.50,
+        color: Colors.black54,
+        opacity: 0.85,
         child: Container(
           padding: EdgeInsets.all(20),
           child: Column(
@@ -34,7 +34,7 @@ class _LoginState extends State<Login> {
             children: [
               CircleAvatar(
                 radius: 50,
-                backgroundColor: Colors.greenAccent,
+                backgroundColor: Colors.white24,
                 child: Image.asset('images/icon.png'),
               ),
               SizedBox(

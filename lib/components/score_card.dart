@@ -46,17 +46,16 @@ class ScoreCard extends StatelessWidget {
             ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Color(0xff1E1E20),
+              color: Colors.white54,
             ),
           ),
           Container(
             alignment: Alignment.topCenter,
-            margin: EdgeInsets.only(bottom: 230),
+            margin: EdgeInsets.only(bottom: 200),
             child: CircleAvatar(
-              radius: 50,
-              //foregroundColor: Color(0xff1B192D),
-              backgroundColor: Color(0xffFD673B),
-              child: Image.asset('images/icon.png'),
+              radius: 42,
+              backgroundColor: Colors.teal,
+              child: Image.asset('images/profilePic.png'),
             ),
           ),
         ],

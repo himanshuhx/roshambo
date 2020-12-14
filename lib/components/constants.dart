@@ -7,11 +7,11 @@ const kHeadingTextStyle = TextStyle(
 );
 
 const kBottomSheetTextStyle = TextStyle(
-  fontWeight: FontWeight.bold,
-  fontSize: 25,
+  fontWeight: FontWeight.w200,
+  fontSize: 20,
   color: Colors.white,
-  letterSpacing: 1.5,
-  fontFamily: 'Ubuntu',
+  letterSpacing: 1.2,
+  fontFamily: 'Russo One',
 );
 
 const kGameOverTextStyle = TextStyle(
@@ -58,11 +58,11 @@ const kTextFieldStyle = InputDecoration(
     borderRadius: BorderRadius.all(Radius.circular(10.0)),
   ),
   enabledBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: Color(0xffFB5757), width: 1.0),
+    borderSide: BorderSide(color: Colors.teal, width: 1.0),
     borderRadius: BorderRadius.all(Radius.circular(10.0)),
   ),
   focusedBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: Color(0xffFB5757), width: 2.0),
+    borderSide: BorderSide(color: Colors.teal, width: 2.0),
     borderRadius: BorderRadius.all(Radius.circular(18.0)),
   ),
 );
