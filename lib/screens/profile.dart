@@ -5,9 +5,6 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:roshambo/components/constants.dart';
 import 'package:roshambo/components/button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -18,16 +15,13 @@ class _ProfileState extends State<Profile> {
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   User loggedInUser;
-  String nickName = 'anonymous';
+  String nickName = 'unknown';
   bool showSpinner = false;
 
   @override
   void initState() {
     super.initState();
     getCurrentUser();
-    setState(() {
-      showSpinner = true;
-    });
   }
 
   void getCurrentUser() async {
@@ -40,7 +34,7 @@ class _ProfileState extends State<Profile> {
             .doc(loggedInUser.uid)
             .get()
             .then((value) {
-          nickName = value.data()['nickName'] ?? 'anonymous';
+          nickName = value.data()['nickName'] ?? 'unknown';
           setState(() {
             showSpinner = false;
             nickName;
@@ -53,62 +47,73 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xff1B192D),
       body: ModalProgressHUD(
-        color: Color(0xff1B192D),
+        color: Colors.amber,
+        opacity: 0.75,
         inAsyncCall: showSpinner,
-        child: Container(
-          margin: EdgeInsets.fromLTRB(20, 50, 20, 30),
-          padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              GestureDetector(
-                // onTap: ,
-                child: CircleAvatar(
-                  radius: 70,
-                  backgroundColor: Colors.amber,
-                  child: Image.asset('images/icon.png'),
-                ),
+        child: SafeArea(
+          child: Center(
+            child: Container(
+              margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+              padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
+              height: MediaQuery.of(context).size.height * 0.65,
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    // onTap: ,
+                    child: CircleAvatar(
+                      radius: 70,
+                      backgroundColor: Colors.black45,
+                      child: Image.asset('images/icon.png'),
+                    ),
+                  ),
+                  Text(
+                    nickName.toUpperCase(),
+                    style: kNickNameStyle,
+                  ),
+                  TextField(
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black54,
+                    ),
+                    onChanged: (value) {
+                      nickName = value;
+                    },
+                    decoration: kTextFieldStyle.copyWith(
+                        hintText: 'Enter your new Name',
+                        hintStyle: TextStyle(
+                          color: Colors.black45,
+                        )),
+                  ),
+                  Button(
+                    title: 'Update',
+                    onPressed: () {
+                      setState(() {
+                        showSpinner = true;
+                      });
+                      _firestore
+                          .collection('users')
+                          .doc(loggedInUser.uid)
+                          .update({
+                        'nickName': nickName,
+                      });
+                      setState(() {
+                        showSpinner = false;
+                      });
+                    },
+                  )
+                ],
               ),
-              Text(
-                nickName.toUpperCase(),
-                style: kNickNameStyle,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: Colors.teal,
               ),
-              TextField(
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black45,
-                ),
-                onChanged: (value) {
-                  nickName = value;
-                },
-                decoration: kTextFieldStyle.copyWith(
-                    hintText: 'Enter your new Name',
-                    hintStyle: TextStyle(
-                      color: Colors.black26,
-                    )),
-              ),
-              Button(
-                title: 'Update',
-                onPressed: () {
-                  setState(() {
-                    showSpinner = true;
-                  });
-                  _firestore.collection('users').doc(loggedInUser.uid).update(
-                      {'nickName': nickName, 'userUid': loggedInUser.uid});
-                  setState(() {
-                    showSpinner = false;
-                  });
-                },
-              )
-            ],
-          ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
-            color: Colors.teal,
+            ),
           ),
         ),
       ),

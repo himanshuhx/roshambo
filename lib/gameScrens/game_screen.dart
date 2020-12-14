@@ -16,14 +16,16 @@ class _GameScreenState extends State<GameScreen> {
   String user_choice = 'paper';
   String verdict;
   int score = 0;
-  int life_left = 5;
+  int life_left = 2;
   var kActivecolor = Colors.lightGreenAccent;
-  var kNotActiveColor = Colors.white38;
+  var kNotActiveColor = Colors.white24;
 
   @override
   Widget build(BuildContext context) {
     int LifeLeft() {
-      life_left = life_left - 1;
+      setState(() {
+        life_left = life_left - 1;
+      });
       return life_left;
     }
 
@@ -120,9 +122,7 @@ class _GameScreenState extends State<GameScreen> {
                 ),
                 decoration: BoxDecoration(
                   color: Colors.amber,
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(25),
-                      bottomRight: Radius.circular(25)),
+                  borderRadius: BorderRadius.circular(20),
                 ),
               ),
             ),
@@ -172,10 +172,11 @@ class _GameScreenState extends State<GameScreen> {
                       padding: EdgeInsets.all(35),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
                             child: Text(
-                              verdict,
+                              verdict.toUpperCase(),
                               style: kBottomSheetTextStyle,
                             ),
                           ),
@@ -185,23 +186,22 @@ class _GameScreenState extends State<GameScreen> {
                             child: Image.asset('images/$computer_choice.png'),
                           ),
                           Text(
-                            'Your Opponent Chose',
-                            style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white70,
-                            ),
+                            'Opponent -> $computer_choice'.toUpperCase(),
+                            style: kBottomSheetTextStyle,
                           ),
                         ],
                       ),
                       decoration: BoxDecoration(
                         color: Colors.lightBlueAccent,
                         borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(25),
-                            topLeft: Radius.circular(25)),
+                          topRight: Radius.circular(25),
+                          topLeft: Radius.circular(25),
+                        ),
                       ),
                     ),
-                    decoration: BoxDecoration(color: Color(0xff2D2D2D)),
+                    decoration: BoxDecoration(
+                      color: Colors.black45,
+                    ),
                   ),
                 );
                 setState(() {
@@ -217,7 +217,10 @@ class _GameScreenState extends State<GameScreen> {
                 alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.1,
-                color: Color(0xff6539B3),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.yellowAccent,
+                ),
               ),
             ),
           ],

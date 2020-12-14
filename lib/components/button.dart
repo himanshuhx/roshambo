@@ -26,6 +26,7 @@ class Button extends StatelessWidget {
               color: Colors.white,
               fontSize: 20,
               fontWeight: FontWeight.w400,
+              fontFamily: 'Ubuntu',
             ),
           ),
         ),

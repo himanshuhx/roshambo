@@ -26,24 +26,29 @@ class _GameState extends State<Game> {
       child: Scaffold(
         backgroundColor: Color(0xff1B192D),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            // SizedBox(
-            //   height: MediaQuery.of(context).size.height * 0.2,
-            //   child: FadeAnimatedTextKit(
-            //     repeatForever: true,
-            //     text: ["Tap To Play"],
-            //     textStyle: TextStyle(
-            //       fontSize: 40,
-            //       fontWeight: FontWeight.w900,
-            //       color: Colors.green,
-            //     ),
-            //     textAlign: TextAlign.center,
-            //   ),
-            // ),
+            SizedBox(
+              height: 50,
+            ),
             Padding(
-                padding: EdgeInsets.all(25),
-                child: Image.asset('images/game_start_icon.png')),
+              padding: EdgeInsets.all(10),
+              child: Image.asset('images/game_start_icon.png'),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.2,
+              child: FadeAnimatedTextKit(
+                repeatForever: true,
+                text: ["Tap To Play"],
+                textStyle: TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.w900,
+                  color: Colors.redAccent,
+                  fontFamily: 'Ubuntu',
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
           ],
         ),
       ),

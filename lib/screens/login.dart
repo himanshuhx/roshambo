@@ -4,8 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:roshambo/components/constants.dart';
 import 'package:roshambo/components/button.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 import 'register.dart';
 import 'home.dart';
 
@@ -23,9 +21,11 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: ModalProgressHUD(
-        color: Colors.amberAccent,
         inAsyncCall: showSpinner,
+        color: Colors.amberAccent,
+        opacity: 0.50,
         child: Container(
           padding: EdgeInsets.all(20),
           child: Column(
@@ -33,29 +33,12 @@ class _LoginState extends State<Login> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CircleAvatar(
-                radius: 70,
-                backgroundColor: Colors.amber,
+                radius: 50,
+                backgroundColor: Colors.greenAccent,
                 child: Image.asset('images/icon.png'),
               ),
               SizedBox(
-                height: 20,
-              ),
-              // SizedBox(
-              //               //   child: ColorizeAnimatedTextKit(
-              //               //     isRepeatingAnimation: true,
-              //               //     text: ['Welcome Back', 'We Miss You', 'Login And Play'],
-              //               //     textStyle: kHeadingTextStyle,
-              //               //     textAlign: TextAlign.center,
-              //               //     colors: [
-              //               //       Color(0xffFB5757),
-              //               //       Colors.blue,
-              //               //       Colors.yellow,
-              //               //       Colors.red,
-              //               //     ],
-              //               //   ),
-              //               // ),
-              SizedBox(
-                height: 20,
+                height: 40,
               ),
               TextField(
                 textAlign: TextAlign.center,
@@ -66,7 +49,7 @@ class _LoginState extends State<Login> {
                   email = value;
                 },
                 decoration: kTextFieldStyle.copyWith(
-                    hintText: 'Enter your mail',
+                    hintText: 'Email Id Here',
                     hintStyle: TextStyle(
                       color: Colors.white70,
                     )),
@@ -76,6 +59,7 @@ class _LoginState extends State<Login> {
               ),
               TextField(
                 textAlign: TextAlign.center,
+                obscureText: true,
                 style: TextStyle(
                   color: Colors.white70,
                 ),
@@ -152,8 +136,9 @@ class _LoginState extends State<Login> {
                       'here',
                       style: TextStyle(
                         color: Colors.redAccent,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w300,
+                        fontFamily: 'Pacifico',
                       ),
                     ),
                   ),

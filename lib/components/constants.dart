@@ -10,6 +10,8 @@ const kBottomSheetTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 25,
   color: Colors.white,
+  letterSpacing: 1.5,
+  fontFamily: 'Ubuntu',
 );
 
 const kGameOverTextStyle = TextStyle(
@@ -19,21 +21,35 @@ const kGameOverTextStyle = TextStyle(
   fontFamily: 'Russo One',
 );
 
+const kGameCardStyle = TextStyle(
+  fontWeight: FontWeight.w900,
+  fontSize: 14,
+  fontFamily: 'Ubuntu',
+  color: Colors.white70,
+);
+
 const kNickNameStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 30,
+  fontFamily: 'Pacifico',
+  color: Colors.white,
+  letterSpacing: 3,
 );
 
 const kGameHeadingStyle = TextStyle(
+  fontFamily: 'Orbitron',
   fontSize: 22,
   fontWeight: FontWeight.w900,
   color: Color(0xff1B192D),
+  letterSpacing: 1.5,
 );
 
 const kGameButtonTextStyle = TextStyle(
-  fontSize: 25,
+  fontSize: 28,
   fontWeight: FontWeight.bold,
-  color: Colors.white,
+  color: Colors.black54,
+  fontFamily: "Russo One",
+  letterSpacing: 2,
 );
 
 const kTextFieldStyle = InputDecoration(

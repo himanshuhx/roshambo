@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:roshambo/components/constants.dart';
 import 'package:roshambo/components/score_card.dart';
-import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class GameOver extends StatefulWidget {
   final int currentUserScore;
@@ -18,9 +16,10 @@ class GameOver extends StatefulWidget {
 
 class _GameOverState extends State<GameOver> {
   int currentUserScore;
-  int currentUserHighScore;
-  String firstRankerName;
-  int firstRankerScore;
+  int currentUserHighScore = 0;
+  String currentUserName = 'unknown';
+  String firstRankerName = 'unknown';
+  int firstRankerScore = 0;
   bool showSpinner = true;
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
@@ -38,28 +37,32 @@ class _GameOverState extends State<GameOver> {
     });
   }
 
-  void getCurrentUserHighScore() async {
+  void getCurrentUserHighScore() {
     try {
-      final user = await _auth.currentUser;
+      final user = _auth.currentUser;
       if (user != null) {
         loggedInUser = user;
-        _firestore
-            .collection("users")
-            .doc(loggedInUser.uid)
-            .get()
-            .then((value) {
-          currentUserHighScore = value.data()['score'] ?? currentUserScore;
-          if (currentUserScore >= currentUserHighScore) {
-            _firestore
-                .collection('users')
-                .doc(loggedInUser.uid)
-                .update({'score': currentUserScore});
-          }
-          print(currentUserHighScore);
-          setState(() {
-            showSpinner = false;
-            currentUserScore;
+        try {
+          _firestore
+              .collection("users")
+              .doc(loggedInUser.uid)
+              .get()
+              .then((value) {
+            currentUserHighScore = value.data()['score'];
+            currentUserName = value.data()['nickName'];
+            print(currentUserName);
+            print(currentUserHighScore);
+
+            if (currentUserScore >= currentUserHighScore) {
+              currentUserHighScore = currentUserScore;
+              _firestore.collection('users').doc(loggedInUser.uid).update({
+                'score': currentUserScore,
+              });
+            }
           });
+        } catch (e) {}
+        setState(() {
+          currentUserScore;
         });
       }
     } catch (e) {}
@@ -71,8 +74,10 @@ class _GameOverState extends State<GameOver> {
         .orderBy('score', descending: true)
         .limit(1);
     query.get().then((value) => value.docs.forEach((user) {
-          firstRankerName = user['nickName'] ?? 'anonymous';
-          firstRankerScore = user['score'];
+          setState(() {
+            firstRankerName = user['nickName'] ?? 'unknown';
+            firstRankerScore = user['score'] ?? 0;
+          });
         }));
   }
 
@@ -80,18 +85,8 @@ class _GameOverState extends State<GameOver> {
   Widget build(BuildContext context) {
     return ModalProgressHUD(
       inAsyncCall: showSpinner,
-      color: Color(0xff1B192D),
-      opacity: 0.75,
-      progressIndicator: Container(
-        width: MediaQuery.of(context).size.width * 0.75,
-        height: 30,
-        child: LiquidLinearProgressIndicator(
-          value: 0.25,
-          valueColor: AlwaysStoppedAnimation(Colors.green),
-          backgroundColor: Colors.black45,
-          direction: Axis.horizontal,
-        ),
-      ),
+      color: Colors.amber,
+      opacity: 0.50,
       child: Scaffold(
         body: SafeArea(
           child: Container(
@@ -103,10 +98,18 @@ class _GameOverState extends State<GameOver> {
                   style: kGameOverTextStyle,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ScoreCard(),
-                    ScoreCard(),
+                    ScoreCard(
+                      text: 'Rank 1',
+                      userName: firstRankerName,
+                      score: firstRankerScore,
+                    ),
+                    ScoreCard(
+                      text: 'HIGHSCORE',
+                      userName: currentUserName,
+                      score: currentUserHighScore,
+                    ),
                   ],
                 ),
                 Text(
@@ -129,7 +132,7 @@ class _GameOverState extends State<GameOver> {
                         child: Icon(
                           Icons.autorenew,
                           size: 35,
-                          color: Colors.black45,
+                          color: Colors.black87,
                         ),
                         radius: 35,
                         backgroundColor: Colors.lightGreenAccent,
@@ -147,7 +150,7 @@ class _GameOverState extends State<GameOver> {
                         child: Icon(
                           Icons.home,
                           size: 35,
-                          color: Colors.black45,
+                          color: Colors.black87,
                         ),
                         radius: 35,
                         backgroundColor: Colors.deepOrangeAccent,

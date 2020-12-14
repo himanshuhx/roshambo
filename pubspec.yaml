@@ -38,4 +38,12 @@ flutter:
     - family: Russo One
       fonts:
         - asset: assets/RussoOne-Regular.ttf
-
+    - family: Orbitron
+      fonts:
+        - asset: assets/Orbitron.ttf
+    - family: Pacifico
+      fonts:
+        - asset: assets/Pacifico-Regular.ttf
+    - family: Ubuntu
+      fonts:
+        - asset: assets/Ubuntu-Regular.ttf
