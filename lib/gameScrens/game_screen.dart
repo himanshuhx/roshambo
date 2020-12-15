@@ -16,7 +16,7 @@ class _GameScreenState extends State<GameScreen> {
   String user_choice = 'paper';
   String verdict;
   int score = 0;
-  int life_left = 2;
+  int life_left = 5;
   var kActivecolor = Colors.lightGreenAccent;
   var kNotActiveColor = Colors.white24;
 

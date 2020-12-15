@@ -5,6 +5,7 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:roshambo/components/constants.dart';
 import 'package:roshambo/components/button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:io';
 
 class Profile extends StatefulWidget {
   @override
@@ -65,9 +66,9 @@ class _ProfileState extends State<Profile> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   GestureDetector(
-                    // onTap: ,
+                    // onTap: getImage from gallery,
                     child: CircleAvatar(
-                      radius: 70,
+                      radius: 60,
                       backgroundColor: Colors.black45,
                       child: Image.asset('images/profilePic.png'),
                     ),

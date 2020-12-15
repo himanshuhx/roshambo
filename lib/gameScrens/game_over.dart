@@ -4,6 +4,8 @@ import 'package:roshambo/components/constants.dart';
 import 'package:roshambo/components/score_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'game_screen.dart';
+import 'package:roshambo/screens/about.dart';
 
 class GameOver extends StatefulWidget {
   final int currentUserScore;
@@ -126,36 +128,71 @@ class _GameOverState extends State<GameOver> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.pop(context);
+                        for (int i = 0; i < 3; i++) {
+                          Navigator.pop(context);
+                        }
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return GameScreen();
+                            },
+                          ),
+                        );
                       },
                       child: CircleAvatar(
                         child: Icon(
                           Icons.autorenew,
                           size: 35,
-                          color: Colors.black87,
+                          color: Colors.black45,
                         ),
                         radius: 35,
-                        backgroundColor: Colors.lightGreenAccent,
+                        backgroundColor: Colors.green,
                       ),
                     ),
                     SizedBox(
-                      width: 50,
+                      width: 30,
                     ),
                     GestureDetector(
                       onTap: () {
-                        int count = 0;
-                        Navigator.of(context).popUntil((_) => count++ < 2);
+                        for (int i = 0; i < 3; i++) {
+                          Navigator.pop(context);
+                        }
                       },
                       child: CircleAvatar(
                         child: Icon(
                           Icons.home,
                           size: 35,
-                          color: Colors.black87,
+                          color: Colors.black45,
                         ),
                         radius: 35,
-                        backgroundColor: Colors.deepOrangeAccent,
+                        backgroundColor: Colors.orange,
                       ),
                     ),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return About();
+                            },
+                          ),
+                        );
+                      },
+                      child: CircleAvatar(
+                        child: Icon(
+                          Icons.info_sharp,
+                          size: 35,
+                          color: Colors.black45,
+                        ),
+                        radius: 35,
+                        backgroundColor: Colors.blue,
+                      ),
+                    )
                   ],
                 )
               ],
