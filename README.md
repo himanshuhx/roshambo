@@ -6,6 +6,8 @@ A Rock Paper Scissor Game made with Flutter.
 
 Clone the repository or you can directly paste the project link in Android Studio. Hit Clone :)
 
+## To Download APK 👉🏼 [Click Here](https://drive.google.com/file/d/1KtIGWr9KtHjQYeieDthXXFMgDg6d7cga/view?usp=sharing)
+
 ## Features of Application
 
 - This Application uses Firebase Email Authentication as a SignUp method for users.
