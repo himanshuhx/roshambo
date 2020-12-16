@@ -18,6 +18,7 @@ class _ProfileState extends State<Profile> {
   User loggedInUser;
   String nickName = 'unknown';
   bool showSpinner = true;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -57,58 +58,71 @@ class _ProfileState extends State<Profile> {
         child: SafeArea(
           child: Center(
             child: Container(
-              margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+              margin: EdgeInsets.fromLTRB(20, 30, 20, 0),
               padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
               height: MediaQuery.of(context).size.height * 0.65,
               width: MediaQuery.of(context).size.width,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    // onTap: getImage from gallery,
-                    child: CircleAvatar(
-                      radius: 60,
-                      backgroundColor: Colors.black45,
-                      child: Image.asset('images/profilePic.png'),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      // onTap: getImage from gallery,
+                      child: CircleAvatar(
+                        radius: 60,
+                        backgroundColor: Colors.black45,
+                        child: Image.asset('images/profilePic.png'),
+                      ),
                     ),
-                  ),
-                  Text(
-                    nickName.toUpperCase(),
-                    style: kNickNameStyle,
-                  ),
-                  TextField(
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
+                    Text(
+                      nickName.toUpperCase(),
+                      style: kNickNameStyle,
                     ),
-                    onChanged: (value) {
-                      nickName = value;
-                    },
-                    decoration: kTextFieldStyle.copyWith(
-                        hintText: 'Enter your new Name',
-                        hintStyle: TextStyle(
-                          color: Colors.white70,
-                        )),
-                  ),
-                  Button(
-                    title: 'Update',
-                    onPressed: () {
-                      setState(() {
-                        showSpinner = true;
-                      });
-                      _firestore
-                          .collection('users')
-                          .doc(loggedInUser.uid)
-                          .update({
-                        'nickName': nickName,
-                      });
-                      setState(() {
-                        showSpinner = false;
-                      });
-                    },
-                  )
-                ],
+                    TextFormField(
+                      validator: (value) {
+                        if (value.length > 6) {
+                          return 'Max 1-6 characters allowed';
+                        } else if (value.isEmpty) {
+                          return 'please enter some text';
+                        }
+                        return null;
+                      },
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                      onChanged: (value) {
+                        nickName = value;
+                      },
+                      decoration: kTextFieldStyle.copyWith(
+                          hintText: 'Enter your new Name',
+                          hintStyle: TextStyle(
+                            color: Colors.white70,
+                          )),
+                    ),
+                    Button(
+                      title: 'Update',
+                      onPressed: () {
+                        if (_formKey.currentState.validate()) {
+                          setState(() {
+                            showSpinner = true;
+                          });
+                          _firestore
+                              .collection('users')
+                              .doc(loggedInUser.uid)
+                              .update({
+                            'nickName': nickName,
+                          });
+                          setState(() {
+                            showSpinner = false;
+                          });
+                        }
+                      },
+                    )
+                  ],
+                ),
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),

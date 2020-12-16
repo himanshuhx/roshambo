@@ -34,9 +34,6 @@ class _GameOverState extends State<GameOver> {
     super.initState();
     getCurrentUserHighScore();
     getUserWithHighScore();
-    setState(() {
-      showSpinner = false;
-    });
   }
 
   void getCurrentUserHighScore() {
@@ -81,14 +78,17 @@ class _GameOverState extends State<GameOver> {
             firstRankerScore = user['score'] ?? 0;
           });
         }));
+    setState(() {
+      showSpinner = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
       inAsyncCall: showSpinner,
-      color: Colors.amber,
-      opacity: 0.50,
+      color: Colors.black54,
+      opacity: 0.80,
       child: Scaffold(
         body: SafeArea(
           child: Container(
