@@ -16,8 +16,8 @@ Clone the repository or you can directly paste the project link in Android Studi
 - Game has three cards and rules to play are pretty obvious :)
 - User has 5 lives, after life becomes 0, user is navigated to Game Over Screen.
 - Game Over Screen Shows two Cards.
-- Left most Card shows the name of user with highest score among all players and his username.
-- Right most Card shows current user's highest score till now and his name.
+- Left most Card shows the name of user with highest score among all players and his score.
+- Right most Card shows loggedIn current user's highest score till now and his name.
 
 
 ## Screenshots  :camera:
